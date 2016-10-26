@@ -369,14 +369,24 @@ public class SelectOneMenuBean {
 							JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultado);
 							// System.out.println("ResultJasper:" +
 							// resultSetDataSource);
+							//String reportFilePath = ctx.getServletContextName()
+							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
+							//String reportPath = ctx.getRealPath("/jaspertemplate");
+							URL jasperResURL = this.getClass().getResource("/resources/jaspertemplate/invoice6.jasper");
+							String reportPath = ctx.getRealPath("/jaspertemplate");
+							System.out.println("RUTA:"+jasperResURL);
+							System.out.println("CTX:"+ctx.getServletContextName());
 							
-							System.out.println("RUTA:"+getClass().getResource("/jaspertemplate/invoice6.jasper"));
+						    //String reportNamePath = dispatcher.getServletContext().getRealPath(subReportDir + reportName);
+
+						   
+							
 							//System.out.println("RUTA:"+realPath_in_jasper);
 
-							/*JasperReport jasperReport = (JasperReport) JRLoader
-									.loadObject(getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));*/
 							JasperReport jasperReport = (JasperReport) JRLoader
-									.loadObject(getClass().getResource(realPath_in_jasper));
+									.loadObject(jasperResURL);
+							//JasperReport jasperReport = (JasperReport) JRLoader
+							//		.loadObjectFromFile(reportFilePath);
 							// System.out.println("jasperReport:" +
 							// jasperReport);
 							@SuppressWarnings({ "rawtypes" })
