@@ -376,7 +376,7 @@ public class SelectOneMenuBean {
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
 							String reportPath = ctx.getRealPath("/source/src/main/java/resources/jaspertemplate/invoice6.jasper");
 							System.out.println("RUTA:"+jasperResURL);
-							System.out.println("CTX:"+ctx.getRealPath("/source/src/main/java/resources/jaspertemplate/invoice6.jasper"));
+							System.out.println("CTX:"+ctx.getRealPath("/"));
 							
 						    //String reportNamePath = dispatcher.getServletContext().getRealPath(subReportDir + reportName);
 
