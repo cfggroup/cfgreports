@@ -370,8 +370,8 @@ public class SelectOneMenuBean {
 							// System.out.println("ResultJasper:" +
 							// resultSetDataSource);
 							
-							//System.out.println("RUTA:"+getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));
-							System.out.println("RUTA:"+realPath_in_jasper);
+							System.out.println("RUTA:"+getClass().getResource("/jaspertemplate/invoice6.jasper"));
+							//System.out.println("RUTA:"+realPath_in_jasper);
 
 							/*JasperReport jasperReport = (JasperReport) JRLoader
 									.loadObject(getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));*/
