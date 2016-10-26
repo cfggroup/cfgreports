@@ -369,6 +369,9 @@ public class SelectOneMenuBean {
 							JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultado);
 							// System.out.println("ResultJasper:" +
 							// resultSetDataSource);
+							
+							System.out.println("RUTA:"+getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));
+							
 							JasperReport jasperReport = (JasperReport) JRLoader
 									.loadObject(getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));
 							// System.out.println("jasperReport:" +
