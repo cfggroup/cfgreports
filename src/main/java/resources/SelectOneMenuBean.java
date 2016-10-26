@@ -373,18 +373,20 @@ public class SelectOneMenuBean {
 							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
 							URL jasperResURL = this.getClass().getResource("/resources/jaspertemplate/invoice6.jasper");
-							String reportPath = ctx.getRealPath("/jaspertemplate");
+							//String reportPath = ctx.getRealPath("/jaspertemplate");
+							String reportPath = ctx.getRealPath("/source/src/main/java/resources/jaspertemplate/invoice6.jasper");
 							System.out.println("RUTA:"+jasperResURL);
-							System.out.println("CTX:"+ctx.getRealPath("/source"));
+							System.out.println("CTX:"+ctx.getRealPath("/source/src/main/java/resources/jaspertemplate/invoice6.jasper"));
 							
 						    //String reportNamePath = dispatcher.getServletContext().getRealPath(subReportDir + reportName);
 
 						   
 							
 							//System.out.println("RUTA:"+realPath_in_jasper);
-
 							JasperReport jasperReport = (JasperReport) JRLoader
-									.loadObject(jasperResURL);
+									.loadObjectFromFile(reportPath);
+							//JasperReport jasperReport = (JasperReport) JRLoader
+							//		.loadObject(reportPath);
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObjectFromFile(reportFilePath);
 							// System.out.println("jasperReport:" +
