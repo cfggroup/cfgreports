@@ -338,7 +338,7 @@ public class SelectOneMenuBean {
 			// System.out.println("Valor:" + value);
 			ServletContext ctx = (ServletContext) ec.getContext();
 			String realPath_in_jrxml = ctx.getRealPath("/jaspertemplate/invoice.jrxml");
-			String realPath_in_jasper = ctx.getRealPath("/jaspertemplate/invoice.jasper");
+			String realPath_in_jasper = ctx.getRealPath("/jaspertemplate/invoice6.jasper");
 			// System.out.println("JRXML:" + realPath_in_jrxml);
 			if (value != null && value != "" && !value.isEmpty()) {
 
@@ -370,10 +370,13 @@ public class SelectOneMenuBean {
 							// System.out.println("ResultJasper:" +
 							// resultSetDataSource);
 							
-							System.out.println("RUTA:"+getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));
-							
+							//System.out.println("RUTA:"+getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));
+							System.out.println("RUTA:"+realPath_in_jasper);
+
+							/*JasperReport jasperReport = (JasperReport) JRLoader
+									.loadObject(getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));*/
 							JasperReport jasperReport = (JasperReport) JRLoader
-									.loadObject(getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));
+									.loadObject(getClass().getResource(realPath_in_jasper));
 							// System.out.println("jasperReport:" +
 							// jasperReport);
 							@SuppressWarnings({ "rawtypes" })
