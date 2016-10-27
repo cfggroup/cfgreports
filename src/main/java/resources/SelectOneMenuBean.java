@@ -373,7 +373,7 @@ public class SelectOneMenuBean {
 							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
 							URL jasperResURL = getClass().getResource("invoice6.jasper");
-							FileInputStream jasperRepor = new FileInputStream("invoice6.jasper");
+							//FileInputStream jasperRepor = new FileInputStream("/invoice6.jasper");
 							
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
 							String reportPath = ctx.getRealPath("/invoice6.jasper");
@@ -383,14 +383,25 @@ public class SelectOneMenuBean {
 							System.out.println("Ruta de Resources:"+this.getClass().getPackage().toString());
 							System.out.println("URL:"+jasperResURL);
 						    //String reportNamePath = dispatcher.getServletContext().getRealPath(subReportDir + reportName);
+							
+							String path = "/"; 
+							String files;
+					        File folder = new File(path);
+					        File[] listOfFiles = folder.listFiles(); 
+					        for (int i = 0; i < listOfFiles.length; i++)         {
 
+					            if (listOfFiles[i].isFile())             {
+					                files = listOfFiles[i].getName();
+					                System.out.println(files);
+					            }
+					        }
 						   
 							
 							//System.out.println("RUTA:"+realPath_in_jasper);
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObjectFromFile(reportPath);
 							JasperReport jasperReport = (JasperReport) JRLoader
-									.loadObject(jasperRepor);
+									.loadObject(jasperResURL);
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObjectFromFile(reportFilePath);
 							// System.out.println("jasperReport:" +
