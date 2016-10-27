@@ -379,7 +379,7 @@ public class SelectOneMenuBean {
 							String reportPath = ctx.getRealPath("/invoice6.jasper");
 							System.out.println("RUTA:"+jasperResURL);
 							
-							System.out.println("CTX:"+ec.getRealPath("jaspertemplate"));
+							System.out.println("CTX:"+ec.getRealPath("jaspertemplate25"));
 							System.out.println("getClass().getPackage():"+this.getClass().getPackage());
 							System.out.println("Ruta de Resources:"+this.getClass().getPackage().toString());
 							System.out.println("URL:"+jasperResURL);
