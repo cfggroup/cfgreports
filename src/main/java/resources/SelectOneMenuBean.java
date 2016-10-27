@@ -373,6 +373,7 @@ public class SelectOneMenuBean {
 							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
 							URL jasperResURL = getClass().getResource("invoice6.jasper");
+							FileInputStream jasperRepor = new FileInputStream("invoice6.jasper");
 							
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
 							String reportPath = ctx.getRealPath("/invoice6.jasper");
@@ -389,7 +390,7 @@ public class SelectOneMenuBean {
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObjectFromFile(reportPath);
 							JasperReport jasperReport = (JasperReport) JRLoader
-									.loadObject(jasperResURL);
+									.loadObject(jasperRepor);
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObjectFromFile(reportFilePath);
 							// System.out.println("jasperReport:" +
