@@ -372,30 +372,20 @@ public class SelectOneMenuBean {
 							//String reportFilePath = ctx.getServletContextName()
 							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
-							URL jasperResURL = getClass().getResource("invoice6.jasper");
+							URL jasperResURL = getClass().getResource("jaspertemplate/invoice6.jasper");
 							//FileInputStream jasperRepor = new FileInputStream("/invoice6.jasper");
 							
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
 							String reportPath = ctx.getRealPath("/invoice6.jasper");
 							System.out.println("RUTA:"+jasperResURL);
-							System.out.println("CTX:"+ctx.getRealPath("/invoice6.jasper"));
+							
+							System.out.println("CTX:"+ec.getRealPath("jaspertemplate"));
 							System.out.println("getClass().getPackage():"+this.getClass().getPackage());
 							System.out.println("Ruta de Resources:"+this.getClass().getPackage().toString());
 							System.out.println("URL:"+jasperResURL);
 						    //String reportNamePath = dispatcher.getServletContext().getRealPath(subReportDir + reportName);
 							
-							String path = "/"; 
-							String files;
-					        File folder = new File(path);
-					        File[] listOfFiles = folder.listFiles(); 
-					        for (int i = 0; i < listOfFiles.length; i++)         {
-
-					            if (listOfFiles[i].isFile())             {
-					                files = listOfFiles[i].getName();
-					                System.out.println(files);
-					            }
-					        }
-						   
+												   
 							
 							//System.out.println("RUTA:"+realPath_in_jasper);
 							//JasperReport jasperReport = (JasperReport) JRLoader
