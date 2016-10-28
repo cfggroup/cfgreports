@@ -372,7 +372,7 @@ public class SelectOneMenuBean {
 							//String reportFilePath = ctx.getServletContextName()
 							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
-							URL jasperResURL = getClass().getResource("/resources/jaspertemplate/invoice6.jasper");
+							URL jasperResURL = getClass().getResource("/");
 							//FileInputStream jasperRepor = new FileInputStream("/invoice6.jasper");
 							
 							String envVar = System.getenv("OPENSHIFT_HOMEDIR");
