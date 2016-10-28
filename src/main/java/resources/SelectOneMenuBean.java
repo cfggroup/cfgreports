@@ -372,7 +372,7 @@ public class SelectOneMenuBean {
 							//String reportFilePath = ctx.getServletContextName()
 							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
-							URL jasperResURL = getClass().getResource("jaspertemplate/invoice6.jasper");
+							URL jasperResURL = getClass().getResource("/resources/jaspertemplate/invoice6.jasper");
 							//FileInputStream jasperRepor = new FileInputStream("/invoice6.jasper");
 							
 							String envVar = System.getenv("OPENSHIFT_HOMEDIR");
@@ -380,7 +380,7 @@ public class SelectOneMenuBean {
 							
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
 							String reportPath = ctx.getRealPath("/invoice6.jasper");
-							System.out.println("RUTA:"+jasperResURL);
+							System.out.println("RUTA1:"+jasperResURL);
 							
 							System.out.println("CTX:"+ec.getRealPath("/"));
 							System.out.println("getClass().getPackage():"+this.getClass().getPackage());
@@ -394,7 +394,7 @@ public class SelectOneMenuBean {
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObjectFromFile(reportPath);
 							JasperReport jasperReport = (JasperReport) JRLoader
-									.loadObject(jasperResURL);
+									.loadObjectFromFile("/invoice6.jasper");
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObjectFromFile(reportFilePath);
 							// System.out.println("jasperReport:" +
