@@ -372,7 +372,7 @@ public class SelectOneMenuBean {
 							//String reportFilePath = ctx.getServletContextName()
 							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
 							String reportPath = ctx.getRealPath("/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper");
-							//URL jasperResURL = getClass().getResource("/");
+							URL jasperResURL = getClass().getResource(reportPath);
 							//FileInputStream jasperRepor = new FileInputStream("/invoice6.jasper");
 							
 							String envVar = System.getenv("OPENSHIFT_HOMEDIR");
@@ -389,15 +389,15 @@ public class SelectOneMenuBean {
 						    //String reportNamePath = dispatcher.getServletContext().getRealPath(subReportDir + reportName);
 							
 							
-							JasperReport jasperReport = (JasperReport) JRLoader.loadObject(getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));
+							//JasperReport jasperReport = (JasperReport) JRLoader.loadObject(getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));
 
 							//System.out.println("RUTA:"+realPath_in_jasper);
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObject
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObjectFromFile("/invoice6.jasper");
-							//JasperReport jasperReport = (JasperReport) JRLoader
-							//		.loadObjectFromFile(reportFilePath);
+							JasperReport jasperReport = (JasperReport) JRLoader
+									.loadObject(jasperResURL);
 							// System.out.println("jasperReport:" +
 							// jasperReport);
 							@SuppressWarnings({ "rawtypes" })
