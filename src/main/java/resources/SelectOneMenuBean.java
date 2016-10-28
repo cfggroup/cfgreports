@@ -371,7 +371,7 @@ public class SelectOneMenuBean {
 							// resultSetDataSource);
 							//String reportFilePath = ctx.getServletContextName()
 							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
-							String reportPath = ctx.getRealPath("/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper");
+							String reportPath = ctx.getRealPath("/src/main/java/resources/jaspertemplate/invoice6.jasper");
 							URL jasperResURL = getClass().getResource(reportPath);
 							//FileInputStream jasperRepor = new FileInputStream("/invoice6.jasper");
 							
