@@ -368,9 +368,8 @@ public class SelectOneMenuBean {
 						try {
 							
 							ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-							InputStream input = ctx.getResourceAsStream("/WEB-INF/classes/resources/invoice6.jasper");
-							
-							
+							//InputStream input = ctx.getResourceAsStream("/WEB-INF/classes/resources/invoice6.jasper");
+							InputStream input = ec.getResourceAsStream("invoice6.jasper");
 							//InputStream is = ctx.getResourceAsStream("invoice6.jasper");
 							//System.out.println("InputStream:"+is.toString());
 
