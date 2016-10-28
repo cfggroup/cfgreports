@@ -367,9 +367,12 @@ public class SelectOneMenuBean {
 
 						try {
 							
+							ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+							InputStream input = classLoader.getResourceAsStream("invoice6.jasper");
 							
-							InputStream is = ctx.getResourceAsStream("invoice6.jasper");
-							
+							InputStream is = ctx.getResourceAsStream("/invoice6.jasper");
+							System.out.println("InputStream:"+is.toString());
+
 							JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultado);
 							// System.out.println("ResultJasper:" +
 							// resultSetDataSource);
@@ -381,7 +384,6 @@ public class SelectOneMenuBean {
 							
 							String envVar = System.getenv("OPENSHIFT_HOMEDIR");
 							System.out.println("OPENSHIFT_HOMEDIR:"+envVar);
-							System.out.println("InputStream:"+is.toString());
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
 							//String reportPath = ctx.getRealPath("/invoice6.jasper");
 							System.out.println("RUTA1:"+reportPath);
@@ -401,7 +403,7 @@ public class SelectOneMenuBean {
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObjectFromFile("/invoice6.jasper");
 							JasperReport jasperReport = (JasperReport) JRLoader
-									.loadObject(is);
+									.loadObject(input);
 							// System.out.println("jasperReport:" +
 							// jasperReport);
 							@SuppressWarnings({ "rawtypes" })
