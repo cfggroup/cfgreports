@@ -371,30 +371,31 @@ public class SelectOneMenuBean {
 							// resultSetDataSource);
 							//String reportFilePath = ctx.getServletContextName()
 							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
-							//String reportPath = ctx.getRealPath("/jaspertemplate");
-							URL jasperResURL = getClass().getResource("/");
+							String reportPath = ctx.getRealPath("/resources/jaspertemplate/invoice6.jasper");
+							//URL jasperResURL = getClass().getResource("/");
 							//FileInputStream jasperRepor = new FileInputStream("/invoice6.jasper");
 							
 							String envVar = System.getenv("OPENSHIFT_HOMEDIR");
 							System.out.println("OPENSHIFT_HOMEDIR:"+envVar);
 							
 							//String reportPath = ctx.getRealPath("/jaspertemplate");
-							String reportPath = ctx.getRealPath("/invoice6.jasper");
-							System.out.println("RUTA1:"+jasperResURL);
+							//String reportPath = ctx.getRealPath("/invoice6.jasper");
+							System.out.println("RUTA1:"+reportPath);
 							
 							System.out.println("CTX:"+ec.getRealPath("/"));
 							System.out.println("getClass().getPackage():"+this.getClass().getPackage());
 							System.out.println("Ruta de Resources:"+this.getClass().getPackage().toString());
-							System.out.println("URL:"+jasperResURL);
+							System.out.println("URL:"+reportPath);
 						    //String reportNamePath = dispatcher.getServletContext().getRealPath(subReportDir + reportName);
 							
-												   
 							
+							JasperReport jasperReport = (JasperReport) JRLoader.loadObject(getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));
+
 							//System.out.println("RUTA:"+realPath_in_jasper);
 							//JasperReport jasperReport = (JasperReport) JRLoader
-							//		.loadObjectFromFile(reportPath);
-							JasperReport jasperReport = (JasperReport) JRLoader
-									.loadObjectFromFile("/invoice6.jasper");
+							//		.loadObject
+							//JasperReport jasperReport = (JasperReport) JRLoader
+							//		.loadObjectFromFile("/invoice6.jasper");
 							//JasperReport jasperReport = (JasperReport) JRLoader
 							//		.loadObjectFromFile(reportFilePath);
 							// System.out.println("jasperReport:" +
