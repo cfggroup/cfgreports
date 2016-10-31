@@ -369,8 +369,8 @@ public class SelectOneMenuBean {
 						try {
 							InputStream inputJRXML = ec.getResourceAsStream("/invoice6.jrxml");
 							InputStream imgInputStream = ec.getResourceAsStream("/logo.png");
-							//Map<String, Object> param = new HashMap<String, Object>();
-						    //param.put("LOGO", imgInputStream);
+							Map<String, Object> param = new HashMap<String, Object>();
+						    param.put("LOGO", imgInputStream);
 
 							/**/
 						    JasperReport report = JasperCompileManager.compileReport(inputJRXML);
@@ -378,7 +378,7 @@ public class SelectOneMenuBean {
 							//InputStream input = ec.getResourceAsStream("/invoice6.jasper");
 							JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultado);
 							//JasperReport jasperReport = (JasperReport) JRLoader.loadObject(input);
-							JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),resultSetDataSource);
+							JasperPrint jasperPrint = JasperFillManager.fillReport(report, param,resultSetDataSource);
 							fc.release();/**/
 							ec.responseReset();
 							ec.setResponseContentType("application/pdf");
