@@ -367,12 +367,18 @@ public class SelectOneMenuBean {
 						ResultSet resultado = f.consultar(sql);
 
 						try {
-							
+							InputStream inputJRXML = ec.getResourceAsStream("/invoice6.jrxml");
+							InputStream imgInputStream = ec.getResourceAsStream("/logo.png");
+							Map<String, Object> param = new HashMap<String, Object>();
+						    param.put("LOGO", imgInputStream);
+
+							/**/
+						    JasperReport report = JasperCompileManager.compileReport(inputJRXML);
+						    /**/
 							InputStream input = ec.getResourceAsStream("/invoice6.jasper");
 							JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultado);
-							JasperReport jasperReport = (JasperReport) JRLoader.loadObject(input);
-							@SuppressWarnings({ "rawtypes" })
-							JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(),resultSetDataSource);
+							//JasperReport jasperReport = (JasperReport) JRLoader.loadObject(input);
+							JasperPrint jasperPrint = JasperFillManager.fillReport(report, param,resultSetDataSource);
 							fc.release();/**/
 							ec.responseReset();
 							ec.setResponseContentType("application/pdf");
