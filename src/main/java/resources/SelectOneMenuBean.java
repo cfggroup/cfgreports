@@ -378,7 +378,7 @@ public class SelectOneMenuBean {
 							//InputStream input = ec.getResourceAsStream("/invoice6.jasper");
 							JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultado);
 							//JasperReport jasperReport = (JasperReport) JRLoader.loadObject(input);
-							JasperPrint jasperPrint = JasperFillManager.fillReport(report, param,resultSetDataSource);
+							JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),resultSetDataSource);
 							fc.release();/**/
 							ec.responseReset();
 							ec.setResponseContentType("application/pdf");
