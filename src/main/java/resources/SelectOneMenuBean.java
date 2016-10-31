@@ -348,8 +348,6 @@ public class SelectOneMenuBean {
 				 */
 				String realPath_out = ctx.getRealPath("/invoices");
 				File pdfAbsolutePath = new File(realPath_out + "/invoice_" + value + ".pdf");
-				// System.out.println("realPath_out:" + realPath_out + "
-				// pdfAbsolutePath:" + pdfAbsolutePath);
 				File fichero = new File(pdfAbsolutePath.toString());
 
 				if (!fichero.exists()) {
@@ -367,56 +365,15 @@ public class SelectOneMenuBean {
 
 						try {
 							
-							ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-							//InputStream input = ctx.getResourceAsStream("/WEB-INF/classes/resources/invoice6.jasper");
 							InputStream input = ec.getResourceAsStream("/invoice6.jasper");
-							//InputStream is = ctx.getResourceAsStream("invoice6.jasper");
-							//System.out.println("InputStream:"+is.toString());
-
 							JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultado);
-							// System.out.println("ResultJasper:" +
-							// resultSetDataSource);
-							//String reportFilePath = ctx.getServletContextName()
-							//	    + "/WEB-INF/classes/resources/jaspertemplate/invoice6.jasper";
-							String reportPath = ctx.getRealPath("/source/src/main/java/resources/jaspertemplate/invoice6.jasper");
-							URL jasperResURL = getClass().getResource(reportPath);
-							//FileInputStream jasperRepor = new FileInputStream("/invoice6.jasper");
-							
-							String envVar = System.getenv("OPENSHIFT_HOMEDIR");
-							System.out.println("OPENSHIFT_HOMEDIR:"+envVar);
-							//String reportPath = ctx.getRealPath("/jaspertemplate");
-							//String reportPath = ctx.getRealPath("/invoice6.jasper");
-							System.out.println("RUTA1:"+reportPath);
-							
-							System.out.println("CTX:"+ec.getRealPath("/"));
-							System.out.println("getClass().getPackage():"+this.getClass().getPackage());
-							System.out.println("Ruta de Resources:"+this.getClass().getPackage().toString());
-							System.out.println("URL:"+reportPath);
-						    //String reportNamePath = dispatcher.getServletContext().getRealPath(subReportDir + reportName);
-							
-							
-							//JasperReport jasperReport = (JasperReport) JRLoader.loadObject(getClass().getResource("/resources/jaspertemplate/invoice6.jasper"));
-
-							//System.out.println("RUTA:"+realPath_in_jasper);
-							//JasperReport jasperReport = (JasperReport) JRLoader
-							//		.loadObject
-							//JasperReport jasperReport = (JasperReport) JRLoader
-							//		.loadObjectFromFile("/invoice6.jasper");
-							JasperReport jasperReport = (JasperReport) JRLoader
-									.loadObject(input);
-							// System.out.println("jasperReport:" +
-							// jasperReport);
+							JasperReport jasperReport = (JasperReport) JRLoader.loadObject(input);
 							@SuppressWarnings({ "rawtypes" })
-							JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(),
-									resultSetDataSource);
-							// System.out.println("jasperPrint:" + jasperPrint);
-
-							// fc.responseComplete();
-							// fc.release();
+							JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(),resultSetDataSource);
+							fc.release();/**/
 							ec.responseReset();
 							ec.setResponseContentType("application/pdf");
-							ec.setResponseHeader("Content-Disposition",
-									"attachment; filename='invoice_" + value + ".pdf'");
+							ec.setResponseHeader("Content-Disposition","attachment; filename='invoice_" + value + ".pdf'");
 							ec.setResponseContentLength(ec.getResponseBufferSize());
 
 							OutputStream output = ec.getResponseOutputStream();
@@ -426,17 +383,14 @@ public class SelectOneMenuBean {
 							exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 							exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(output));
 							exporter.exportReport();
-
-							// fc.getCurrentInstance().getViewRoot().getViewMap().clear();
+							fc.responseComplete();/**/
+							
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						//fc.release();
-						//FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().put("hidden1", null);
-						//fc.getCurrentInstance().getViewRoot().getViewMap().clear();
 						System.out.println("FINALLY");
 						f.desconectar();
 					}
@@ -450,9 +404,7 @@ public class SelectOneMenuBean {
 			}
 
 		} else {
-			System.out.println("Committed");
-			
-			
+			System.out.println("Committed");	
 		}
 	}
 }
