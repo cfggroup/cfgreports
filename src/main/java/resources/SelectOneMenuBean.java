@@ -363,42 +363,15 @@ public class SelectOneMenuBean {
 						String sql = "SELECT gyr_cliente.CEDULA, " + "   NUM_FACTUR, " + "   CONCEPTO," + "   VAL_IVA,"
 								+ "   FORMAT(VAL_IVA,2) AS VAL_IVA_F," + "   VALOR," + "   FORMAT(VALOR,2) AS VALOR_F,"
 								+ "   (VALOR+VAL_IVA) AS TOTAL, " + "   FORMAT(VALOR+VAL_IVA,2) AS TOTAL_F,"
-								+ "   NOMBRE, " + "   DIRECCION, " + "   TELEFONO, " + "   FECHA_EMI, LOGO_REPORTE"
-								+ "   FROM facturacab JOIN gyr_cliente ON gyr_cliente.CEDULA = facturacab.CEDULA LEFT OUTER JOIN"
-								+ "   config_formulario ON config_formulario.nombre_reporte = 'CFG' "
-								+ "   WHERE NUM_FACTUR = " + value;
+								+ "   NOMBRE, " + "   DIRECCION, " + "   TELEFONO, " + "   FECHA_EMI "
+								+ "   FROM facturacab, gyr_cliente WHERE NUM_FACTUR = " + value
+								+ " AND facturacab.CEDULA = gyr_cliente.CEDULA";
 								
 						// System.out.println(sql);
 						ResultSet resultado = f.consultar(sql);
 
 						try {
-							LinkedList info = new LinkedList();
-							Consulta consulta = new Consulta();
-							while (resultado.next())
-							{
-							consulta.setCEDULA(resultado.getString("CEDULA"));
-							consulta.setCONCEPTO(resultado.getString("CONCEPTO"));
-							consulta.setDIRECCION(resultado.getString("DIRECCION"));
-							consulta.setFECHA_EMI(resultado.getDate("FECHA_EMI"));
-							consulta.setNOMBRE(resultado.getString("NOMBRE"));
-							consulta.setNUM_FACTUR(resultado.getInt("NUM_FACTUR"));
-							consulta.setTELEFONO(resultado.getString("TELEFONO"));
-							consulta.setTOTAL(resultado.getInt("TOTAL"));
-							consulta.setTOTAL_F(resultado.getInt("TOTAL_F"));
-							consulta.setVAL_IVA(resultado.getInt("VAL_IVA"));
-							consulta.setVAL_IVA_F(resultado.getInt("VAL_IVA_F"));
-							consulta.setVALOR(resultado.getInt("VALOR"));
-							consulta.setVALOR_F(resultado.getInt("VALOR_F"));
 							
-							Blob blob = resultado.getBlob("LOGO_REPORTE");
-							int blobLength=(int)blob.length();
-							byte[] blobasbytes = blob.getBytes(1, blobLength);
-							ImageIcon icon = new ImageIcon((byte[])blobasbytes);
-							
-							consulta.setLOGO_REPORTE(icon.getImage());
-							info.add(consulta);
-							 }
-							resultado.close();
 							InputStream inputJRXML = ec.getResourceAsStream("/invoice6.jrxml");
 							//InputStream imgInputStream = ec.getResourceAsStream("logo.png");
 							//Map<String, Object> param = new HashMap<String, Object>();
@@ -410,8 +383,8 @@ public class SelectOneMenuBean {
 							//InputStream input = ec.getResourceAsStream("/invoice6.jasper");
 							JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultado);
 							//JasperReport jasperReport = (JasperReport) JRLoader.loadObject(input);
-							//JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),resultSetDataSource);
-							JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),new JRBeanCollectionDataSource(info));
+							JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),resultSetDataSource);
+							//JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),new JRBeanCollectionDataSource(info));
 							fc.release();/**/
 							ec.responseReset();
 							ec.setResponseContentType("application/pdf");

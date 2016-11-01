@@ -239,9 +239,9 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TELEFONO}]]></textFieldExpression>
 			</textField>
-			<image isUsingCache="true" evaluationTime="Report" hyperlinkType="">
-				<reportElement x="0" y="0" width="81" height="81" uuid="a4e6ea35-dd28-4289-b5da-17c235e28b16"/>
-				<imageExpression><![CDATA[$F{LOGO_REPORTE}]]></imageExpression>
+			<image>
+				<reportElement x="342" y="30" width="50" height="50" uuid="23bbed50-1403-40ae-b5cf-e4e357b535f1"/>
+				<imageExpression><![CDATA["http://jsf2-2-wf-maven-all-cfgreports.44fs.preview.openshiftapps.com/imgs/logo.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
