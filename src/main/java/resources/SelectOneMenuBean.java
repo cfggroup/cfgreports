@@ -374,7 +374,8 @@ public class SelectOneMenuBean {
 						try {
 							LinkedList info = new LinkedList();
 							Consulta consulta = new Consulta();
-							
+							while (resultado.next())
+							{
 							consulta.setCEDULA(resultado.getString("CEDULA"));
 							consulta.setCONCEPTO(resultado.getString("CONCEPTO"));
 							consulta.setDIRECCION(resultado.getString("DIRECCION"));
@@ -396,7 +397,8 @@ public class SelectOneMenuBean {
 							
 							consulta.setLOGO_REPORTE(icon.getImage());
 							info.add(consulta);
-							
+							 }
+							resultado.close();
 							InputStream inputJRXML = ec.getResourceAsStream("/invoice6.jrxml");
 							//InputStream imgInputStream = ec.getResourceAsStream("logo.png");
 							//Map<String, Object> param = new HashMap<String, Object>();
