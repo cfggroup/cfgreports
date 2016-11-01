@@ -24,6 +24,7 @@ import net.sf.jasperreports.export.Exporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -385,12 +386,17 @@ public class SelectOneMenuBean {
 							//JasperReport jasperReport = (JasperReport) JRLoader.loadObject(input);
 							JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),resultSetDataSource);
 							//JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),new JRBeanCollectionDataSource(info));
-							fc.release();/**/
+							/*fc.release();/**/
 							ec.responseReset();
 							ec.setResponseContentType("application/pdf");
 							ec.setResponseHeader("Content-Disposition","attachment; filename='invoice_" + value + ".pdf'");
 							ec.setResponseContentLength(ec.getResponseBufferSize());
-
+							
+							JasperExportManager.exportReportToPdfFile(jasperPrint, realPath_out + "/invoice_" + value + ".pdf");
+							//Para visualizar el pdf directamente desde java
+							JasperViewer.viewReport(jasperPrint, false);
+							
+							/*
 							OutputStream output = ec.getResponseOutputStream();
 
 							@SuppressWarnings("rawtypes")
