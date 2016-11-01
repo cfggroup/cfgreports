@@ -368,9 +368,9 @@ public class SelectOneMenuBean {
 
 						try {
 							InputStream inputJRXML = ec.getResourceAsStream("/invoice6.jrxml");
-							InputStream imgInputStream = ec.getResourceAsStream("logo.png");
-							Map<String, Object> param = new HashMap<String, Object>();
-						    param.put("LOGO", imgInputStream);
+							//InputStream imgInputStream = ec.getResourceAsStream("logo.png");
+							//Map<String, Object> param = new HashMap<String, Object>();
+						    //param.put("LOGO", imgInputStream);
 
 							/**/
 						    JasperReport report = JasperCompileManager.compileReport(inputJRXML);
