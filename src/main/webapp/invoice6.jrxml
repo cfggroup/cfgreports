@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-10-31T17:17:44 -->
+<!-- 2016-11-01T14:05:59 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CFG_MySQL"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<style name="Title" forecolor="#FFFFFF" fontName="San Serif" fontSize="50" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="San Serif" fontSize="18" isBold="false"/>
@@ -129,6 +129,7 @@
 	<field name="TOTAL" class="java.math.BigDecimal"/>
 	<field name="TOTAL_F" class="java.lang.String"/>
 	<field name="FECHA_EMI" class="java.lang.String"/>
+	<field name="LOGO_REPORTE" class="java.awt.Image"/>
 	<variable name="VALOR1" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{VALOR}]]></variableExpression>
 	</variable>
@@ -176,11 +177,6 @@
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{FECHA_EMI}]]></textFieldExpression>
 			</textField>
-			<image scaleImage="FillFrame" hAlign="Center">
-				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="0" y="0" width="80" height="80" isRemoveLineWhenBlank="true" uuid="94883631-a913-43e2-b182-ab8d77d0181e"/>
-				<graphicElement fill="Solid"/>
-				<imageExpression><![CDATA["./imgs/logo.jpg"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement key="" mode="Opaque" x="422" y="58" width="58" height="20" uuid="0b3f9342-da78-4cfa-9fc5-2301c4749678"/>
 				<box rightPadding="4"/>
@@ -243,8 +239,9 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TELEFONO}]]></textFieldExpression>
 			</textField>
-			<image hyperlinkType="">
-				<reportElement x="-1" y="0" width="81" height="81" uuid="a4e6ea35-dd28-4289-b5da-17c235e28b16"/>
+			<image isUsingCache="true" evaluationTime="Report" hyperlinkType="">
+				<reportElement x="0" y="0" width="81" height="81" uuid="a4e6ea35-dd28-4289-b5da-17c235e28b16"/>
+				<imageExpression><![CDATA[$F{LOGO_REPORTE}]]></imageExpression>
 			</image>
 		</band>
 	</title>
