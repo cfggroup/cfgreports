@@ -398,7 +398,7 @@ public class SelectOneMenuBean {
 							exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 							exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(output));
 							exporter.exportReport();
-							fc.responseComplete();/**/
+							//fc.responseComplete();/**/
 							
 						} catch (Exception e) {
 							e.printStackTrace();
