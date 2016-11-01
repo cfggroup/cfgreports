@@ -57,7 +57,7 @@ public class Consulta {
 	public void setVAL_IVA_F(int vAL_IVA_F) {
 		VAL_IVA_F = vAL_IVA_F;
 	}
-	int getVALOR() {
+	public int getVALOR() {
 		return VALOR;
 	}
 	public void setVALOR(int vALOR) {
