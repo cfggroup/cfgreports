@@ -407,7 +407,7 @@ public class SelectOneMenuBean {
 							ec.setResponseContentType("application/pdf");
 							ec.setResponseHeader("Content-Disposition","attachment; filename='invoice_" + value + ".pdf'");
 							//ec.setResponseHeader("Content-Disposition","attachment; filename='invoice_" + value + ".xml'");
-							ec.setResponseContentLength(ec.getResponseBufferSize());
+							//ec.setResponseContentLength(ec.getResponseBufferSize());
 							
 							//JasperExportManager.exportReportToPdfFile(jasperPrint, realPath_out + "/invoice_" + value + ".pdf");
 							//JasperExportManager.exportReportToXml(jasperPrint);//(jasperPrint, realPath_out + "/invoice_" + value + ".html");

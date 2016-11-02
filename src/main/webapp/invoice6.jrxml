@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-11-02T11:52:34 -->
+<!-- 2016-11-02T16:50:35 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CFG_CLOUDFOUNDRY"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -206,10 +206,7 @@ WHERE NUM_FACTUR = 68169]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TELEFONO}]]></textFieldExpression>
 			</textField>
-			<image hyperlinkType="">
-				<reportElement x="-1" y="0" width="81" height="81" uuid="a4e6ea35-dd28-4289-b5da-17c235e28b16"/>
-				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte[]) $F{COMPANY_LOGO})]]></imageExpression>
-			</image>
+			
 			<textField>
 				<reportElement x="95" y="7" width="315" height="25" uuid="c9e98a74-4c84-49a1-9dff-0e35ea3185a9">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -279,6 +276,10 @@ WHERE NUM_FACTUR = 68169]]>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{COMPANY_MAIL}]]></textFieldExpression>
 			</textField>
+			<image hyperlinkType="">
+				<reportElement x="1" y="1" width="81" height="81" uuid="a4e6ea35-dd28-4289-b5da-17c235e28b16"/>
+				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte[]) $F{COMPANY_LOGO})]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<columnHeader>
@@ -375,7 +376,7 @@ WHERE NUM_FACTUR = 68169]]>
 				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="0" y="147" width="556" height="30" backcolor="#E6E8E9" uuid="5aa7b06f-82af-4346-ac69-9afe3a8ecbf6">
+				<reportElement mode="Opaque" x="1" y="150" width="554" height="27" backcolor="#E6E8E9" uuid="5aa7b06f-82af-4346-ac69-9afe3a8ecbf6">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
