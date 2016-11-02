@@ -55,7 +55,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ActionListener;
-
+// Archivo que funciona en Openshift y genera factura de manera correta con logo.
 /**
  * Session Bean implementation class SelectOneMenuBean
  */
