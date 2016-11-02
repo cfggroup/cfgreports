@@ -384,19 +384,20 @@ public class SelectOneMenuBean {
 							//InputStream input = ec.getResourceAsStream("/invoice6.jasper");
 							JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultado);
 							//JasperReport jasperReport = (JasperReport) JRLoader.loadObject(input);
+							//JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(),resultSetDataSource);
 							JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),resultSetDataSource);
 							//JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),new JRBeanCollectionDataSource(info));
-							/*fc.release();/**/
+							fc.release();/**/
 							ec.responseReset();
 							ec.setResponseContentType("application/pdf");
 							ec.setResponseHeader("Content-Disposition","attachment; filename='invoice_" + value + ".pdf'");
 							ec.setResponseContentLength(ec.getResponseBufferSize());
 							
-							JasperExportManager.exportReportToPdfFile(jasperPrint, realPath_out + "/invoice_" + value + ".pdf");
+							//JasperExportManager.exportReportToPdfFile(jasperPrint, realPath_out + "/invoice_" + value + ".pdf");
 							//Para visualizar el pdf directamente desde java
-							JasperViewer.viewReport(jasperPrint, false);
+							//JasperViewer.viewReport(jasperPrint, false);
 							
-							/*
+							
 							OutputStream output = ec.getResponseOutputStream();
 
 							@SuppressWarnings("rawtypes")
@@ -404,7 +405,7 @@ public class SelectOneMenuBean {
 							exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 							exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(output));
 							exporter.exportReport();
-							//fc.responseComplete();/**/
+							fc.responseComplete();/**/
 							
 						} catch (Exception e) {
 							e.printStackTrace();

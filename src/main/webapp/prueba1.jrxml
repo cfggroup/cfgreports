@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-11-01T17:55:29 -->
+<!-- 2016-11-01T17:34:56 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CFG_MySQL"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -43,6 +43,10 @@
 			<bottomPen lineWidth="0.5" lineColor="#000000"/>
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#D8D8D8"/>
+		</conditionalStyle>
 	</style>
 	<style name="Table 1_TH" mode="Opaque" backcolor="#BFE1FF">
 		<box>
@@ -70,6 +74,10 @@
 			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
 			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
 		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFFFFF"/>
+		</conditionalStyle>
 	</style>
 	<subDataset name="tableDataset" whenResourceMissingType="Empty" uuid="f13e6d36-5148-4ecc-bbe3-3035def80980">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CFG"/>
@@ -127,6 +135,18 @@
 	<variable name="VAL_IVA1" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{VAL_IVA}]]></variableExpression>
 	</variable>
+	<group name="Gruppo1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupHeader>
+			<band height="20"/>
+		</groupHeader>
+		<groupFooter>
+			<band>
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</band>
+		</groupFooter>
+	</group>
 	<title>
 		<band height="196" splitType="Stretch">
 			<staticText>
@@ -156,7 +176,6 @@
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{FECHA_EMI}]]></textFieldExpression>
 			</textField>
-			
 			<staticText>
 				<reportElement key="" mode="Opaque" x="422" y="58" width="58" height="20" uuid="0b3f9342-da78-4cfa-9fc5-2301c4749678"/>
 				<box rightPadding="4"/>
@@ -219,9 +238,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TELEFONO}]]></textFieldExpression>
 			</textField>
-			<image hyperlinkType="">
-				<reportElement x="-1" y="0" width="81" height="81" uuid="a4e6ea35-dd28-4289-b5da-17c235e28b16"/>
-			</image>
 		</band>
 	</title>
 	<columnHeader>
@@ -260,7 +276,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CEDULA}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,###,##0.00">
+			<textField pattern="¤ #,###,##0.00">
 				<reportElement mode="Opaque" x="350" y="30" width="101" height="80" backcolor="#EFEFEF" uuid="369395ea-f7d4-4fe3-b5ee-ef56d146da0c"/>
 				<textElement textAlignment="Right">
 					<paragraph lineSpacing="1_1_2" rightIndent="10" spacingBefore="10"/>
@@ -274,7 +290,7 @@
 				</textElement>
 				<text><![CDATA[   imp]]></text>
 			</staticText>
-			<textField pattern="$ #,###,##0.00">
+			<textField pattern="¤ #,###,##0.00">
 				<reportElement mode="Opaque" x="455" y="30" width="99" height="80" backcolor="#EFEFEF" uuid="c7020fb3-d57f-44d5-a028-55d9b07e33ed"/>
 				<textElement textAlignment="Right">
 					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0" rightIndent="10" spacingBefore="10"/>
@@ -307,7 +323,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Serif" size="9" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[ 2016 CFG CONUNDRUM FINANCIAL GROUP ]]></text>
+				<text><![CDATA[© 2016 CFG CONUNDRUM FINANCIAL GROUP ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="385" y="-31" width="60" height="30" forecolor="#FFFFFF" backcolor="#000000" uuid="d737aad8-4fe4-45c3-acb6-2abcc567120c"/>
@@ -316,7 +332,7 @@
 				</textElement>
 				<text><![CDATA[  Total:]]></text>
 			</staticText>
-			<textField pattern="$ #,###,##0.00">
+			<textField pattern="¤ #,###,##0.00">
 				<reportElement mode="Opaque" x="445" y="-31" width="110" height="30" forecolor="#FFFFFF" backcolor="#000000" uuid="2f21af85-6117-4134-a7ea-1daaf5d80037"/>
 				<textElement textAlignment="Right" markup="none">
 					<font fontName="SansSerif" size="16" isBold="true"/>
