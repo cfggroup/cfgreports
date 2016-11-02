@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-11-01T17:55:29 -->
+<!-- 2016-11-02T11:52:34 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CFG_MySQL"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CFG_CLOUDFOUNDRY"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<style name="Title" forecolor="#FFFFFF" fontName="San Serif" fontSize="50" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="San Serif" fontSize="18" isBold="false"/>
@@ -99,28 +99,39 @@
 		<field name="FECHA_EMI" class="java.lang.String"/>
 	</subDataset>
 	<queryString>
-		<![CDATA[SELECT GYR_CLIENTE.CEDULA, NUM_FACTUR,CONCEPTO,VAL_IVA,VALOR,
-				       FORMAT(VAL_IVA,2) AS VAL_IVA_F,   
-				       FORMAT(VALOR,2) AS VALOR_F,
-				       (VALOR+VAL_IVA) AS TOTAL,    
-				       FORMAT(VALOR+VAL_IVA,2) AS TOTAL_F,   
-				       NOMBRE,DIRECCION,TELEFONO,FECHA_EMI    
-					FROM FACTURACAB, GYR_CLIENTE
-					WHERE NUM_FACTUR = 24773 AND FACTURACAB.CEDULA = GYR_CLIENTE.CEDULA]]>
+		<![CDATA[SELECT gyr_cliente.CEDULA, NUM_FACTUR, CONCEPTO, VAL_IVA, FORMAT(VAL_IVA,2) AS VAL_IVA_F, VALOR, 
+       FORMAT(VALOR,2) AS VALOR_F, (VALOR+VAL_IVA) AS TOTAL, FORMAT(VALOR+VAL_IVA,2) AS TOTAL_F, 
+       NOMBRE, DIRECCION, TELEFONO, FECHA_EMI, 
+       COMPANY_NAME, COMPANY_PHONE, COMPANY_MAIL, COMPANY_ADDRESS, COMPANY_CITY, 
+       COMPANY_STATE, COMPANY_POSTAL, COMPANY_COUNTRY, REPORT_FOOTER, COMPANY_LOGO, COMPANY_LOGO_PATH
+FROM facturacab JOIN gyr_cliente ON gyr_cliente.CEDULA = facturacab.CEDULA LEFT OUTER JOIN
+	 configuration ON configuration.report_name = 'CFG'
+WHERE NUM_FACTUR = 68169]]>
 	</queryString>
-	<field name="CEDULA" class="java.math.BigDecimal"/>
-	<field name="NUM_FACTUR" class="java.math.BigDecimal"/>
+	<field name="CEDULA" class="java.lang.Integer"/>
+	<field name="NUM_FACTUR" class="java.lang.Integer"/>
 	<field name="CONCEPTO" class="java.lang.String"/>
-	<field name="VAL_IVA" class="java.math.BigDecimal"/>
-	<field name="VALOR" class="java.math.BigDecimal"/>
+	<field name="VAL_IVA" class="java.lang.Integer"/>
 	<field name="VAL_IVA_F" class="java.lang.String"/>
+	<field name="VALOR" class="java.lang.Integer"/>
 	<field name="VALOR_F" class="java.lang.String"/>
+	<field name="TOTAL" class="java.lang.Long"/>
+	<field name="TOTAL_F" class="java.lang.String"/>
 	<field name="NOMBRE" class="java.lang.String"/>
 	<field name="DIRECCION" class="java.lang.String"/>
 	<field name="TELEFONO" class="java.lang.String"/>
-	<field name="TOTAL" class="java.math.BigDecimal"/>
-	<field name="TOTAL_F" class="java.lang.String"/>
-	<field name="FECHA_EMI" class="java.lang.String"/>
+	<field name="FECHA_EMI" class="java.sql.Date"/>
+	<field name="COMPANY_NAME" class="java.lang.String"/>
+	<field name="COMPANY_PHONE" class="java.lang.String"/>
+	<field name="COMPANY_MAIL" class="java.lang.String"/>
+	<field name="COMPANY_ADDRESS" class="java.lang.String"/>
+	<field name="COMPANY_CITY" class="java.lang.String"/>
+	<field name="COMPANY_STATE" class="java.lang.String"/>
+	<field name="COMPANY_POSTAL" class="java.lang.String"/>
+	<field name="COMPANY_COUNTRY" class="java.lang.String"/>
+	<field name="REPORT_FOOTER" class="java.lang.String"/>
+	<field name="COMPANY_LOGO" class="java.lang.Object"/>
+	<field name="COMPANY_LOGO_PATH" class="java.lang.String"/>
 	<variable name="VALOR1" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{VALOR}]]></variableExpression>
 	</variable>
@@ -156,7 +167,6 @@
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{FECHA_EMI}]]></textFieldExpression>
 			</textField>
-			
 			<staticText>
 				<reportElement key="" mode="Opaque" x="422" y="58" width="58" height="20" uuid="0b3f9342-da78-4cfa-9fc5-2301c4749678"/>
 				<box rightPadding="4"/>
@@ -164,29 +174,6 @@
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Invoice:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="7" width="315" height="25" uuid="e622555d-198b-4ccd-a4a1-c59c53304058">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="16" isBold="true"/>
-					<paragraph tabStopWidth="60"/>
-				</textElement>
-				<text><![CDATA[CFG CONUNDRUM FINANCIAL GROUP]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="62" width="205" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>
-				<text><![CDATA[+1 305-373-4337 correo@cfg.com]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="32" width="205" height="15" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde"/>
-				<text><![CDATA[1400 Biscayne Blvd]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="47" width="205" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
-				<text><![CDATA[Miami, FL 33132, EEUU]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="498" y="58" width="52" height="20" uuid="a612204b-8e5d-4756-9b2f-5b22e1542cd8"/>
@@ -221,7 +208,77 @@
 			</textField>
 			<image hyperlinkType="">
 				<reportElement x="-1" y="0" width="81" height="81" uuid="a4e6ea35-dd28-4289-b5da-17c235e28b16"/>
+				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte[]) $F{COMPANY_LOGO})]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement x="95" y="7" width="315" height="25" uuid="c9e98a74-4c84-49a1-9dff-0e35ea3185a9">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COMPANY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="32" width="205" height="15" uuid="3fc1523c-5a20-4672-8054-e1f4d6bcf087">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{COMPANY_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="47" width="17" height="15" uuid="5e63620f-2973-4368-a5d1-2aae30dfec3e">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{COMPANY_STATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="47" width="35" height="15" uuid="8f136218-249e-4050-a72b-0022bc32095b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{COMPANY_CITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="153" y="47" width="32" height="15" uuid="96c02b18-8bef-4454-9083-31e0166591a3">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{COMPANY_POSTAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="191" y="47" width="52" height="15" uuid="2701bf8f-25d0-41de-9624-bb1e69aa3f8f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{COMPANY_COUNTRY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="62" width="85" height="15" uuid="20112a23-2764-469c-b181-043c9eac92c3">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{COMPANY_PHONE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="181" y="62" width="145" height="15" uuid="3d47d470-fc2c-400c-b284-0ada3acc3428">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{COMPANY_MAIL}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
@@ -260,7 +317,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CEDULA}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,###,##0.00">
+			<textField pattern="¤ #,###,##0.00">
 				<reportElement mode="Opaque" x="350" y="30" width="101" height="80" backcolor="#EFEFEF" uuid="369395ea-f7d4-4fe3-b5ee-ef56d146da0c"/>
 				<textElement textAlignment="Right">
 					<paragraph lineSpacing="1_1_2" rightIndent="10" spacingBefore="10"/>
@@ -274,7 +331,7 @@
 				</textElement>
 				<text><![CDATA[   imp]]></text>
 			</staticText>
-			<textField pattern="$ #,###,##0.00">
+			<textField pattern="¤ #,###,##0.00">
 				<reportElement mode="Opaque" x="455" y="30" width="99" height="80" backcolor="#EFEFEF" uuid="c7020fb3-d57f-44d5-a028-55d9b07e33ed"/>
 				<textElement textAlignment="Right">
 					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0" rightIndent="10" spacingBefore="10"/>
@@ -303,26 +360,30 @@
 				<text><![CDATA[Observations:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="147" width="556" height="30" backcolor="#E6E8E9" uuid="36aa233d-4305-48e6-974a-1bbf89bb3c8f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Serif" size="9" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[ 2016 CFG CONUNDRUM FINANCIAL GROUP ]]></text>
-			</staticText>
-			<staticText>
 				<reportElement mode="Opaque" x="385" y="-31" width="60" height="30" forecolor="#FFFFFF" backcolor="#000000" uuid="d737aad8-4fe4-45c3-acb6-2abcc567120c"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[  Total:]]></text>
 			</staticText>
-			<textField pattern="$ #,###,##0.00">
+			<textField pattern="¤ #,###,##0.00">
 				<reportElement mode="Opaque" x="445" y="-31" width="110" height="30" forecolor="#FFFFFF" backcolor="#000000" uuid="2f21af85-6117-4134-a7ea-1daaf5d80037"/>
 				<textElement textAlignment="Right" markup="none">
 					<font fontName="SansSerif" size="16" isBold="true"/>
 					<paragraph leftIndent="0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="147" width="556" height="30" backcolor="#E6E8E9" uuid="5aa7b06f-82af-4346-ac69-9afe3a8ecbf6">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REPORT_FOOTER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</lastPageFooter>
