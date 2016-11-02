@@ -88,7 +88,7 @@ public class SelectOneMenuBean {
 	}
 
 	public void setNum_factur(Long num_factur) {
-		System.out.println(num_factur);
+		//System.out.println(num_factur);
 		this.num_factur = num_factur;
 	}
 
@@ -258,7 +258,7 @@ public class SelectOneMenuBean {
 	// Metodo para MySQL
 	public ArrayList<SelectOneMenuBean> getDatosFacturaByCedula() {
 
-		System.out.println("CEDULA:" + this.cedula);
+		//System.out.println("CEDULA:" + this.cedula);
 		// System.out.println("Cedula:"+id);
 		if (this.cedula != null && this.cedula != "" && !(this.cedula.isEmpty())) {
 			// System.out.println("Cedula:"+this.cedula);
@@ -267,7 +267,7 @@ public class SelectOneMenuBean {
 			String sql = "SELECT CEDULA, NUM_FACTUR, CONCEPTO, " + " FORMAT(VAL_IVA,2) AS VAL_IVA, "
 					+ " FORMAT(VALOR,2) AS VALOR, " + " FECHA_EMI " + " FROM facturacab " + " WHERE CEDULA = '"
 					+ this.cedula + "'";
-			System.out.println("Query1:" + sql);
+			//System.out.println("Query1:" + sql);
 			ResultSet resultados = f.consultar(sql);
 			try {
 				while (resultados.next()) {
@@ -320,18 +320,18 @@ public class SelectOneMenuBean {
 
 	// Metodo para MySQL
 
-	@SuppressWarnings({ "unchecked", "static-access" })
+	@SuppressWarnings({ "unchecked" })
 	public void pdfFromXmlFile() throws SQLException, IOException {
 
 		FacesContext fc = FacesContext.getCurrentInstance();
 		ExternalContext ec = fc.getExternalContext();
 
 		Map<String, String> requestParams = fc.getExternalContext().getRequestParameterMap();
-		System.out.println("RequestParametesr:" + requestParams);
+		//System.out.println("RequestParametesr:" + requestParams);
 
 		if (!ec.isResponseCommitted()) {
 			String value = ec.getRequestParameterMap().get("hidden1");
-			System.out.println("no Committed");
+			//System.out.println("no Committed");
 			/*
 			 * if(boton.getComponent().getClientId().equals("invoiceID"+value)){
 			 * 
@@ -340,7 +340,7 @@ public class SelectOneMenuBean {
 			HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
 			@SuppressWarnings("rawtypes")
 			Enumeration params = request.getParameterNames();
-			System.out.println("Params:" + params);
+			//System.out.println("Params:" + params);
 
 			// System.out.println("Valor:" + value);
 			ServletContext ctx = (ServletContext) ec.getContext();
@@ -369,20 +369,20 @@ public class SelectOneMenuBean {
 								+ " AND facturacab.CEDULA = gyr_cliente.CEDULA";*/
 						
 						String sql = "SELECT gyr_cliente.CEDULA, NUM_FACTUR, CONCEPTO, "
-								+ "			 VAL_IVA, FORMAT(VAL_IVA,2) AS VAL_IVA_F, VALOR,"
-								+ "          FORMAT(VALOR,2) AS VALOR_F, (VALOR+VAL_IVA) AS TOTAL,"
-								+ "          FORMAT(VALOR+VAL_IVA,2) AS TOTAL_F,"
-								+ "          NOMBRE, DIRECCION, TELEFONO, FECHA_EMI,"
-								+ "			 COMPANY_NAME, COMPANY_PHONE, COMPANY_MAIL,"
-								+ "			 COMPANY_ADDRESS, COMPANY_CITY,COMPANY_STATE,"
-								+ "			 COMPANY_POSTAL, COMPANY_COUNTRY, REPORT_FOOTER,"
-								+ "			 COMPANY_LOGO, COMPANY_LOGO_PATH"
-								+ "   FROM   facturacab JOIN gyr_cliente "
-								+ "			 ON gyr_cliente.CEDULA = facturacab.CEDULA LEFT OUTER JOIN"
-								+ "          configuration ON configuration.report_name = 'CFG'"
-								+ "   WHERE  NUM_FACTUR = "+value;
+								+ " VAL_IVA, FORMAT(VAL_IVA,2) AS VAL_IVA_F, VALOR,"
+								+ " FORMAT(VALOR,2) AS VALOR_F, (VALOR+VAL_IVA) AS TOTAL,"
+								+ " FORMAT(VALOR+VAL_IVA,2) AS TOTAL_F,"
+								+ " NOMBRE, DIRECCION, TELEFONO, FECHA_EMI,"
+								+ " COMPANY_NAME, COMPANY_PHONE, COMPANY_MAIL,"
+								+ " COMPANY_ADDRESS, COMPANY_CITY,COMPANY_STATE,"
+								+ " COMPANY_POSTAL, COMPANY_COUNTRY, REPORT_FOOTER,"
+								+ " COMPANY_LOGO, COMPANY_LOGO_PATH"
+								+ " FROM   facturacab JOIN gyr_cliente "
+								+ "	ON gyr_cliente.CEDULA = facturacab.CEDULA LEFT OUTER JOIN"
+								+ " configuration ON configuration.report_name = 'CFG'"
+								+ " WHERE  NUM_FACTUR = "+value;
 								
-						// System.out.println(sql);
+						//System.out.println(sql);
 						ResultSet resultado = f.consultar(sql);
 
 						try {
@@ -399,17 +399,20 @@ public class SelectOneMenuBean {
 							JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultado);
 							//JasperReport jasperReport = (JasperReport) JRLoader.loadObject(input);
 							//JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(),resultSetDataSource);
+							@SuppressWarnings("rawtypes")
 							JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),resultSetDataSource);
 							//JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap(),new JRBeanCollectionDataSource(info));
 							fc.release();/**/
 							ec.responseReset();
 							ec.setResponseContentType("application/pdf");
 							ec.setResponseHeader("Content-Disposition","attachment; filename='invoice_" + value + ".pdf'");
+							//ec.setResponseHeader("Content-Disposition","attachment; filename='invoice_" + value + ".xml'");
 							ec.setResponseContentLength(ec.getResponseBufferSize());
 							
 							//JasperExportManager.exportReportToPdfFile(jasperPrint, realPath_out + "/invoice_" + value + ".pdf");
+							//JasperExportManager.exportReportToXml(jasperPrint);//(jasperPrint, realPath_out + "/invoice_" + value + ".html");
 							//Para visualizar el pdf directamente desde java
-							//JasperViewer.viewReport(jasperPrint, false);
+							//JasperViewer.viewReport(jasperPrint, true);
 							
 							
 							OutputStream output = ec.getResponseOutputStream();
@@ -419,7 +422,7 @@ public class SelectOneMenuBean {
 							exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 							exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(output));
 							exporter.exportReport();
-							//fc.responseComplete();/**/
+							fc.responseComplete();/**/
 							
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -435,8 +438,8 @@ public class SelectOneMenuBean {
 					// existe");
 				}
 			} else {
-				System.out.println("Invoice pdfFromXmlFile:" + value
-						+ " Salida del metodo ya que entra lo acciono el boton de Cedulas");
+				//System.out.println("Invoice pdfFromXmlFile:" + value
+				//		+ " Salida del metodo ya que entra lo acciono el boton de Cedulas");
 			}
 
 		} else {
