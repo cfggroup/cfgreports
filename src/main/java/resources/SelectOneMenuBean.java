@@ -361,12 +361,26 @@ public class SelectOneMenuBean {
 					SelectOneMenuBean f = new SelectOneMenuBean();
 					SelectOneMenuBean con = f.conectar();
 					try {
-						String sql = "SELECT gyr_cliente.CEDULA, " + "   NUM_FACTUR, " + "   CONCEPTO," + "   VAL_IVA,"
+						/*String sql = "SELECT gyr_cliente.CEDULA, " + "   NUM_FACTUR, " + "   CONCEPTO," + "   VAL_IVA,"
 								+ "   FORMAT(VAL_IVA,2) AS VAL_IVA_F," + "   VALOR," + "   FORMAT(VALOR,2) AS VALOR_F,"
 								+ "   (VALOR+VAL_IVA) AS TOTAL, " + "   FORMAT(VALOR+VAL_IVA,2) AS TOTAL_F,"
 								+ "   NOMBRE, " + "   DIRECCION, " + "   TELEFONO, " + "   FECHA_EMI "
 								+ "   FROM facturacab, gyr_cliente WHERE NUM_FACTUR = " + value
-								+ " AND facturacab.CEDULA = gyr_cliente.CEDULA";
+								+ " AND facturacab.CEDULA = gyr_cliente.CEDULA";*/
+						
+						String sql = "SELECT gyr_cliente.CEDULA, NUM_FACTUR, CONCEPTO, "
+								+ "			 VAL_IVA, FORMAT(VAL_IVA,2) AS VAL_IVA_F, VALOR,"
+								+ "          FORMAT(VALOR,2) AS VALOR_F, (VALOR+VAL_IVA) AS TOTAL,"
+								+ "          FORMAT(VALOR+VAL_IVA,2) AS TOTAL_F,"
+								+ "          NOMBRE, DIRECCION, TELEFONO, FECHA_EMI,"
+								+ "			 COMPANY_NAME, COMPANY_PHONE, COMPANY_MAIL,"
+								+ "			 COMPANY_ADDRESS, COMPANY_CITY,COMPANY_STATE,"
+								+ "			 COMPANY_POSTAL, COMPANY_COUNTRY, REPORT_FOOTER,"
+								+ "			 COMPANY_LOGO, COMPANY_LOGO_PATH"
+								+ "   FROM   facturacab JOIN gyr_cliente "
+								+ "			 ON gyr_cliente.CEDULA = facturacab.CEDULA LEFT OUTER JOIN"
+								+ "          configuration ON configuration.report_name = 'CFG'"
+								+ "   WHERE  NUM_FACTUR = "+value;
 								
 						// System.out.println(sql);
 						ResultSet resultado = f.consultar(sql);
